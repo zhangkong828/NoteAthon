@@ -1,0 +1,36 @@
+﻿body,
+html {
+    font-family: 微软雅黑;
+    padding: 0;
+    margin: 0;
+}
+
+/* 左侧 start */
+.menu-btn-o {
+    position: fixed;
+    border: none;
+    z-index: 39;
+    top: .5em;
+    left: .5em;
+    transition: all .4s ease-in-out;
+}
+
+.menu-btn-c {
+    position: fixed;
+    border: none;
+    z-index: 39;
+    bottom: 0;
+}
+
+.menu {
+    width: 200px;
+    min-height: 400px;
+}
+
+/* 左侧 end */
+
+/* Main start */
+
+
+
+/* Main end */

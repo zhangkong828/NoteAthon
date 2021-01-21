@@ -1,0 +1,98 @@
+﻿
+@{
+    Layout = null;
+    var returnUrl = ViewData["ReturnUrl"];
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>登录 - NoteAthon</title>
+    <!-- 引入样式 -->
+    <link href="~/lib/element-ui/index.css" rel="stylesheet" />
+    <!-- 引入组件库 -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/lib/element-ui/index.js"></script>
+
+    <style>
+        h1 {
+            text-align: center;
+            color: #606266;
+        }
+
+        form {
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+            border-radius: 2px;
+        }
+
+        .main {
+            width: 400px;
+            margin: 0px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginApp">
+        <el-container>
+            <el-header></el-header>
+            <el-main class="main">
+                <h1>NoteAthon</h1>
+                <el-form ref="form" :model="form" class="z-depth-2">
+                    <el-form-item>
+                        <el-input v-model="form.username" placeholder="用户名"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-input v-model="form.password" placeholder="密码" type="password"></el-input>
+                    </el-form-item>
+                    <el-form-item style="text-align:right;">
+                        <el-button type="primary" @@click="login">登录</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-main>
+            <el-footer></el-footer>
+        </el-container>
+    </div>
+    <script>
+    var successUrl ='@(returnUrl)';
+    new Vue({
+        el: '#loginApp',
+        data() {
+            return {
+                form: {
+                    username: '',
+                    password: ''
+                }
+            }
+        },
+        methods: {
+            login() {
+                var that = this
+                var postData = {
+                    userName: that.form.username,
+                    password: that.form.password
+                }
+                $.ajax({
+				    url: "/account/login",
+				    type: "post",
+				    data: postData,
+				    success: function(res) {
+					    console.log(res);
+					    if (res.code == 0) {
+                            window.location.href = successUrl;
+
+					    } else {
+						    alert(res.msg);
+					    }
+				    }
+			    });
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
